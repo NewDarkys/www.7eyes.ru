@@ -17,7 +17,7 @@ const istokWeb = Istok_Web({
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className={`min-h-screen ${russoOne.variable} ${istokWeb.variable}`}>
       <div className="h-[200vh]">
         <div className="h-45 bg-[#0c0c0c] flex flex-row items-center justify-between px-0">
           <div className="flex items-center">
