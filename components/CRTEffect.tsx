@@ -11,7 +11,7 @@ export default function CRTEffect() {
     (async () => {
       const audioCtx = new window.AudioContext();
       const source = audioCtx.createBufferSource();
-      const arrayBuffer = await fetch("audio/perfect_loop.wav").then((res) =>
+      const arrayBuffer = await fetch("/audio/perfect_loop.wav").then((res) =>
         res.arrayBuffer()
       );
       const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
@@ -30,17 +30,21 @@ export default function CRTEffect() {
   };
 
   return (
-    <div>
+    <div
+      className={`animated-CRT z-[10000] ${
+        !isStarted ? "" : "pointer-events-none"
+      }`}
+    >
       {!isStarted ? (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black text-white cursor-pointer"
+          className="relative inset-0 flex z-[9999] items-center justify-center bg-black text-white cursor-pointer w-full h-screen overflow-hidden"
           onClick={handleStart}
         >
-          <h1 className="text-2xl font-bold">Login as guest 👆</h1>
+          <h1 className="text-2xl font-bold relative">Login as guest 👆</h1>
         </div>
       ) : (
         <>
-          <div className="scanline"></div>
+          <div className="scanline relative w-full h-screen overflow-hidden pointer-events-none"></div>
           <Image
             src="/images/CRT.png"
             alt="CRT Screen Effect"
@@ -49,7 +53,7 @@ export default function CRTEffect() {
             fill
             sizes="100vw"
             quality={100}
-            className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-10"
+            className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-10 z-[9998]"
           />
         </>
       )}

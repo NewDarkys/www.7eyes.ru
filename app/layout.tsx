@@ -27,10 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased animated-CRT`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CRTEffect />
-        {children}
+        <div className="holderDiv">{children}</div>
       </body>
     </html>
   );
