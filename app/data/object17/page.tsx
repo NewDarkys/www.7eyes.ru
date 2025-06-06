@@ -66,8 +66,8 @@ export default function Home() {
           </div>
 
           <Image
-            src="/images/banner.gif"
-            alt="Banner"
+            src="/images/profile_upper.gif"
+            alt="profile_upper"
             height={1000}
             width={1200}
             priority={true}
