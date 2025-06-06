@@ -2,14 +2,14 @@ import Image from "next/image";
 import Badge from "@/components/Badge";
 import { Russo_One, Istok_Web } from "next/font/google";
 
-Russo_One({
+const russoOne = Russo_One({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-russo-one",
   display: "swap",
 });
 
-Istok_Web({
+const istokWeb = Istok_Web({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-istok-web",
