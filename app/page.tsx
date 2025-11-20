@@ -11,7 +11,7 @@ export default function Home() {
         className="mx-auto mb-4"
         priority={false}
       />
-      <h1 className="text-2xl font-bold text-center">Schism is inevitable.</h1>
+      <h1 className="text-2xl font-bold text-center">Universum regitur</h1>
       <p className="text-center">©7ERT 2012-2025</p>
     </main>
   );
