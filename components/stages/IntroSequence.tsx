@@ -63,7 +63,8 @@ export default function Intro() {
   };
 
   useEffect(() => {
-    const preloadAudio = async () => {
+    const runSequence = async () => {
+      // Предзагружаем аудио
       const audioUrls = [
         "/audio/websfx/login_process.mp3",
         "/audio/websfx/secret_warning.mp3",
@@ -75,32 +76,37 @@ export default function Intro() {
       await Promise.all(
         audioUrls.map((url) => fetch(url).then((res) => res.arrayBuffer()))
       );
+
+      console.log("All audio preloaded, starting sequence...");
+
+      // Запускаем последовательность
+      setStage("loginProcess");
+      playBackgroundMusic("/audio/websfx/login_process.mp3", false);
+      await delay(300);
+      setStage("topSecret");
+      playBackgroundMusic("/audio/websfx/secret_warning.mp3", false);
+      await delay(520);
+      setStage("brainWash");
+      playBackgroundMusic("/audio/websfx/brainwash.mp3", false);
+      await delay(500);
+
+      startErrorSequence();
+
+      playBackgroundMusic("/audio/websfx/loading_stages.mp3", false);
+      await delay(3000);
+      playBackgroundMusic("/audio/perfect_loop.wav", true);
+      await delay(500);
+      setStage("passwordPrompt");
     };
 
-    preloadAudio();
     if (typeof window !== "undefined") {
-      window.addEventListener("load", () => {
-        console.log("Page and all resources fully loaded!");
-        (async () => {
-          setStage("loginProcess");
-          playBackgroundMusic("/audio/websfx/login_process.mp3", false);
-          await delay(300);
-          setStage("topSecret");
-          playBackgroundMusic("/audio/websfx/secret_warning.mp3", false);
-          await delay(520);
-          setStage("brainWash");
-          playBackgroundMusic("/audio/websfx/brainwash.mp3", false);
-          await delay(500);
-
-          startErrorSequence();
-
-          playBackgroundMusic("/audio/websfx/loading_stages.mp3", false);
-          await delay(3000);
-          playBackgroundMusic("/audio/perfect_loop.wav", true);
-          await delay(500);
-          setStage("passwordPrompt");
-        })();
-      });
+      if (document.readyState === "complete") {
+        // Страница уже загружена
+        runSequence();
+      } else {
+        // Ждем загрузки страницы
+        window.addEventListener("load", runSequence);
+      }
     }
   }, []);
 
