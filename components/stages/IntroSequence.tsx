@@ -63,25 +63,30 @@ export default function Intro() {
   };
 
   useEffect(() => {
-    (async () => {
-      setStage("loginProcess");
-      playBackgroundMusic("/audio/websfx/login_process.mp3", false);
-      await delay(300);
-      setStage("topSecret");
-      playBackgroundMusic("/audio/websfx/secret_warning.mp3", false);
-      await delay(520);
-      setStage("brainWash");
-      playBackgroundMusic("/audio/websfx/brainwash.mp3", false);
-      await delay(500);
+    if (typeof window !== "undefined") {
+      window.addEventListener("load", () => {
+        console.log("Page and all resources fully loaded!");
+        (async () => {
+          setStage("loginProcess");
+          playBackgroundMusic("/audio/websfx/login_process.mp3", false);
+          await delay(300);
+          setStage("topSecret");
+          playBackgroundMusic("/audio/websfx/secret_warning.mp3", false);
+          await delay(520);
+          setStage("brainWash");
+          playBackgroundMusic("/audio/websfx/brainwash.mp3", false);
+          await delay(500);
 
-      startErrorSequence();
+          startErrorSequence();
 
-      playBackgroundMusic("/audio/websfx/loading_stages.mp3", false);
-      await delay(3000);
-      playBackgroundMusic("/audio/perfect_loop.wav", true);
-      await delay(500);
-      setStage("passwordPrompt");
-    })();
+          playBackgroundMusic("/audio/websfx/loading_stages.mp3", false);
+          await delay(3000);
+          playBackgroundMusic("/audio/perfect_loop.wav", true);
+          await delay(500);
+          setStage("passwordPrompt");
+        })();
+      });
+    }
   }, []);
 
   return (
