@@ -33,10 +33,7 @@ export default function CRTEffect() {
   const playBackgroundMusic = async (audioName: string, isLooped: boolean) => {
     try {
       const audioCtx = new (window.AudioContext ||
-        (
-          window as Window &
-            typeof globalThis & { webkitAudioContext?: typeof AudioContext }
-        ).webkitAudioContext)();
+        (window as any).webkitAudioContext)();
       const source = audioCtx.createBufferSource();
       const arrayBuffer = await fetch(audioName).then((res) =>
         res.arrayBuffer()
