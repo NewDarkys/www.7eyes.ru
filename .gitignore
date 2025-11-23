@@ -20,7 +20,7 @@
 # production
 /build
 
-/app/components/CRTEffect_old.tsx
+/components/CRTEffect_old.tsx
 /app/login/test/*
 
 # misc
