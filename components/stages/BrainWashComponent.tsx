@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 type Dot = {
@@ -58,7 +58,7 @@ export default function TopSecret() {
         className="text-6xl font-bold text-center relative z-10 text-red-600"
         style={{ WebkitTextStroke: "3px black", paintOrder: "stroke fill" }}
       >
-        FOCUS HERE AND DON'T MOVE
+        FOCUS HERE AND DO NOT MOVE
       </h1>
       <Image
         src="/images/11.png"

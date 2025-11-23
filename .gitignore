@@ -20,6 +20,9 @@
 # production
 /build
 
+/app/components/CRTEffect_old.tsx
+/app/login/test/*
+
 # misc
 .DS_Store
 *.pem
