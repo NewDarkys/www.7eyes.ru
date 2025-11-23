@@ -23,7 +23,7 @@ export default function TopSecret() {
         width={350}
         height={350}
         className="mx-auto mb-4"
-        priority={false}
+        priority={true}
       />
       <h3
         className="text-3xl font-bold text-center"

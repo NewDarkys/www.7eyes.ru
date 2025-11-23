@@ -9,7 +9,7 @@ export default function CRTEffect() {
       <Image
         src="/images/CRT.png"
         alt="CRT Screen Effect"
-        priority
+        priority={true}
         style={{ objectFit: "cover" }}
         fill
         sizes="100vw"

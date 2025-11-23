@@ -17,7 +17,7 @@ export default function Login() {
         width={150}
         height={150}
         className="mx-auto mt-15 mb-15 relative z-10"
-        priority={false}
+        priority={true}
       />
     </main>
   );
