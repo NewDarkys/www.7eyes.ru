@@ -63,6 +63,21 @@ export default function Intro() {
   };
 
   useEffect(() => {
+    const preloadAudio = async () => {
+      const audioUrls = [
+        "/audio/websfx/login_process.mp3",
+        "/audio/websfx/secret_warning.mp3",
+        "/audio/websfx/brainwash.mp3",
+        "/audio/websfx/loading_stages.mp3",
+        "/audio/perfect_loop.wav",
+      ];
+
+      await Promise.all(
+        audioUrls.map((url) => fetch(url).then((res) => res.arrayBuffer()))
+      );
+    };
+
+    preloadAudio();
     if (typeof window !== "undefined") {
       window.addEventListener("load", () => {
         console.log("Page and all resources fully loaded!");
