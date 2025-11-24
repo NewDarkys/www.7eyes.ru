@@ -77,12 +77,35 @@ export default function Intro() {
         "/audio/websfx/password_prompt.mp3",
       ];
 
-      await Promise.all(
-        audioUrls.map((url) => fetch(url).then((res) => res.arrayBuffer()))
-      );
+      function loadAudio(url: string) {
+        return new Promise((resolve, reject) => {
+          const audio = new Audio();
 
-      console.log("All audio preloaded, starting sequence...");
+          audio.addEventListener(
+            "canplaythrough",
+            () => {
+              console.log(`Audio loaded: ${url}`);
+              resolve(audio);
+            },
+            { once: true }
+          );
 
+          audio.addEventListener(
+            "error",
+            (e) => {
+              console.error(`Audio load failed: ${url}`, e);
+              reject(e);
+            },
+            { once: true }
+          );
+
+          audio.src = url;
+          audio.load();
+        });
+      }
+
+      await Promise.all(audioUrls.map((url) => loadAudio(url)));
+      console.log("All audio REALLY loaded, starting sequence...");
       setStage("loginProcess");
       playBackgroundMusic("/audio/websfx/login_process.mp3", false);
       await delay(2320);
