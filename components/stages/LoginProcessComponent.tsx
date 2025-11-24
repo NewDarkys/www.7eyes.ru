@@ -19,6 +19,7 @@ export default function Login() {
         className="mx-auto mt-15 mb-15 relative z-10"
         priority={true}
         loading="eager"
+        fetchPriority="high"
       />
     </main>
   );

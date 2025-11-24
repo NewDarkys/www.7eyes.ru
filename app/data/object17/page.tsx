@@ -29,6 +29,7 @@ export default function Home() {
               priority={false}
               className="ml-5 noselect object-contain"
               loading="eager"
+              fetchPriority="high"
             />
             <h1 className="font-russo-one ml-3 text-4xl text-white noselect">
               7EYES
@@ -74,6 +75,7 @@ export default function Home() {
             priority={true}
             unoptimized
             className="mx-auto my-5 object-contain rounded-[30px] blur-sm"
+            fetchPriority="high"
           />
 
           <div className="flex justify-center items-center mt-5 sm:ml-50 lg:ml-0 md:ml-0">

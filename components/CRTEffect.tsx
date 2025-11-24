@@ -16,6 +16,7 @@ export default function CRTEffect() {
         quality={100}
         className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-10 z-[9998]"
         loading="eager"
+        fetchPriority="high"
       />
     </div>
   );

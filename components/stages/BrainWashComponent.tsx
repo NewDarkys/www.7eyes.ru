@@ -68,6 +68,7 @@ export default function TopSecret() {
         className="mx-auto mt-15 mb-15 relative z-10"
         priority={true}
         loading="eager"
+        fetchPriority="high"
       />
 
       <style jsx>{`
