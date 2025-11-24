@@ -21,6 +21,7 @@ type Stage =
   | "bios"
   | "passwordPrompt"
   | "completed";
+var isMounted: boolean;
 
 export default function Intro() {
   const [stage, setStage] = useState<Stage>("idle");
@@ -64,13 +65,17 @@ export default function Intro() {
 
   useEffect(() => {
     const runSequence = async () => {
-      // Предзагружаем аудио
+      if (isMounted) {
+        return;
+      }
+      isMounted = true;
       const audioUrls = [
         "/audio/websfx/login_process.mp3",
         "/audio/websfx/secret_warning.mp3",
         "/audio/websfx/brainwash.mp3",
         "/audio/websfx/loading_stages.mp3",
         "/audio/perfect_loop.wav",
+        "/audio/websfx/password_prompt.mp3",
       ];
 
       await Promise.all(
@@ -79,10 +84,9 @@ export default function Intro() {
 
       console.log("All audio preloaded, starting sequence...");
 
-      // Запускаем последовательность
       setStage("loginProcess");
       playBackgroundMusic("/audio/websfx/login_process.mp3", false);
-      await delay(300);
+      await delay(2320);
       setStage("topSecret");
       playBackgroundMusic("/audio/websfx/secret_warning.mp3", false);
       await delay(520);
@@ -96,44 +100,26 @@ export default function Intro() {
       await delay(3000);
       playBackgroundMusic("/audio/perfect_loop.wav", true);
       await delay(500);
+      playBackgroundMusic("/audio/websfx/password_prompt.mp3", false);
+
       setStage("passwordPrompt");
     };
-
     if (typeof window !== "undefined") {
       if (document.readyState === "complete") {
-        // Страница уже загружена
         runSequence();
       } else {
-        // Ждем загрузки страницы
         window.addEventListener("load", runSequence);
       }
     }
+    runSequence();
   }, []);
 
   return (
-    <div
-      className={`animated-CRT z-[10000] ${
-        stage !== "idle" ? "pointer-events-none" : ""
-      }`}
-    >
+    <div>
       {stage === "idle" ? (
-        <div className="relative inset-0 flex z-[9999] items-center justify-center bg-black text-white cursor-pointer w-full h-screen overflow-hidden">
-          <h1 className="text-2xl font-bold relative">Login as guest 👆</h1>
-        </div>
+        <div className="relative inset-0 flex z-[9999] items-center justify-center bg-black text-white cursor-pointer w-full h-screen overflow-hidden"></div>
       ) : (
         <>
-          <div className="scanline relative w-full h-screen overflow-hidden pointer-events-none"></div>
-          <Image
-            src="/images/CRT.png"
-            alt="CRT Screen Effect"
-            priority={true}
-            style={{ objectFit: "cover" }}
-            fill
-            sizes="100vw"
-            quality={100}
-            className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none opacity-10 z-[9998]"
-          />
-
           {stage === "loginProcess" && <LoginProcessConponent />}
           {stage === "topSecret" && <TopSecretComponent />}
           {stage === "brainWash" && <BrainWashComponent />}
