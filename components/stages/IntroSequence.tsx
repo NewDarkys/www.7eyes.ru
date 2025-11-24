@@ -20,7 +20,7 @@ type Stage =
   | "bios"
   | "passwordPrompt"
   | "completed";
-var isMounted: boolean;
+let isMounted: boolean;
 
 export default function Intro() {
   const [stage, setStage] = useState<Stage>("idle");
