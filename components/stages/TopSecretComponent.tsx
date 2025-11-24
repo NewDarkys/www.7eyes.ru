@@ -24,6 +24,7 @@ export default function TopSecret() {
         height={350}
         className="mx-auto mb-4"
         priority={true}
+        loading="eager"
       />
       <h3
         className="text-3xl font-bold text-center"

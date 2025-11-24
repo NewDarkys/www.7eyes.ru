@@ -28,6 +28,7 @@ export default function Home() {
               width={150}
               priority={false}
               className="ml-5 noselect object-contain"
+              loading="eager"
             />
             <h1 className="font-russo-one ml-3 text-4xl text-white noselect">
               7EYES
