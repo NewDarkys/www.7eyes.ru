@@ -104,10 +104,10 @@ export default function Intro() {
         });
       }
 
-      await Promise.all(audioUrls.map((url) => loadAudio(url)));
-      console.log("All audio REALLY loaded, starting sequence...");
       setStage("loginProcess");
       playBackgroundMusic("/audio/websfx/login_process.mp3", false);
+      await Promise.all(audioUrls.map((url) => loadAudio(url)));
+      console.log("All audio REALLY loaded, starting sequence...");
       await delay(2320);
       setStage("topSecret");
       playBackgroundMusic("/audio/websfx/secret_warning.mp3", false);
